@@ -1,1 +1,1 @@
-## End to End to data science repository ##
+## End to End data science repository ##
