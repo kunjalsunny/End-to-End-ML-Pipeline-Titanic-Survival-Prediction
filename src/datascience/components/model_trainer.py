@@ -1,6 +1,9 @@
 import os
 import sys
 from dataclasses import dataclass
+from urllib.parse import urlparse
+
+import mlflow
 
 from src.datascience.exception import CustomException
 from src.datascience.logger import logging
@@ -86,6 +89,34 @@ class ModelTrainer:
             logging.info(f"Best Model: {best_model_name} | Accuracy: {best_model_score}")
             print(f"Best Model: {best_model_name}")
             print(f"Accuracy: {best_model_score}")
+
+            model_names = list(params.keys())
+
+            actual_model = ""
+
+            for model in model_names:
+                if best_model_name == model:
+                    actual_model = actual_model + model
+
+            best_params = params[actual_model]
+            mlflow.set_registry_uri("https://dagshub.com/kunjalsunny/Data-Science-End-to-End.mlflow")
+            tracking_url_type = urlparse(mlflow.get_tracking_uri()).scheme
+            
+            #MLFLOW
+            with mlflow.start_run():
+
+                predicted_qualities = best_model.predict(X_test)
+                best_model_score = accuracy_score(y_test, predicted_qualities)
+
+
+                mlflow.sklearn.log_model(best_model, "model")
+                mlflow.log_params(best_params)
+                mlflow.log_metric("accuracy", best_model_score)
+            
+            if tracking_url_type != "file":
+                mlflow.sklearn.log_model(best_model, "model", registered_model_name=best_model_name)
+            else:
+                mlflow.sklearn.log_model(best_model, "model")
 
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,

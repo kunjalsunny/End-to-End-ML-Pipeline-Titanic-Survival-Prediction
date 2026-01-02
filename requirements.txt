@@ -9,3 +9,4 @@ catboost
 matplotlib
 xgboost
 Flask
+mlflow
