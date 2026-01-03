@@ -113,7 +113,7 @@ class ModelTrainer:
                 mlflow.sklearn.log_model(
                     best_model,
                     artifact_path="model",
-                    registered_model_name="Titanic_Classifier_v2"  # This will version your model
+                    registered_model_name="Titanic_Classifier_v3"  # This will version your model
                 )
             
             if tracking_url_type != "file":

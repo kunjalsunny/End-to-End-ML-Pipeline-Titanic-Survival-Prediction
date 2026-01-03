@@ -9,6 +9,7 @@ import pandas as pd
 from dotenv import load_dotenv
 import pymysql
 import pickle
+import dill
 
 load_dotenv()
 
@@ -73,5 +74,13 @@ def evaluate_models(X_train, y_train, X_test, y_test, model, params, scoring="r2
 
         return report
 
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
     except Exception as e:
         raise CustomException(e, sys)

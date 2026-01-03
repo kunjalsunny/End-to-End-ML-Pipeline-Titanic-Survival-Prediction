@@ -36,10 +36,10 @@ class DataTransformation:
             
             cat_pipeline = Pipeline([
                 ("Imputer", SimpleImputer(strategy="most_frequent")),
-                ("OneHotEncoder", OneHotEncoder(drop='first')),
+                ("OneHotEncoder", OneHotEncoder(drop='first',handle_unknown='ignore')),
                 ("Scaler", StandardScaler(with_mean=False))
             ])
-            
+
             preprocessor = ColumnTransformer(
                 transformers=[
                     ("num_pipeline", num_pipeline, numerical_columns),
