@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+*.log
+.git/
+.dvc/
+.dvcignore
+notebook/
+mlruns/
+Logs/
+artifacts/
+catboost_info/
+.env
