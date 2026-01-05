@@ -8,6 +8,5 @@ __pycache__/
 notebook/
 mlruns/
 Logs/
-artifacts/
 catboost_info/
 .env
