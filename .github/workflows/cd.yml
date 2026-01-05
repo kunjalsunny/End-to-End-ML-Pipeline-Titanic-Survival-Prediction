@@ -53,6 +53,37 @@ jobs:
           envs: IMAGE,AWS_REGION,AWS_ACCOUNT_ID
           script: |
             set -e
+
+            echo "== Disk before =="
+            df -h || true
+            docker system df || true
+
+            # Threshold: if root disk free is less than 2GB -> clean up
+            THRESHOLD_KB=2097152  # 2GB in KB
+            AVAILABLE_KB=$(df --output=avail -k / | tail -1 | tr -d ' ')
+
+            echo "Available KB on /: $AVAILABLE_KB (threshold: $THRESHOLD_KB)"
+
+            if [ "$AVAILABLE_KB" -lt "$THRESHOLD_KB" ]; then
+              echo "Low disk space detected -> cleaning Docker resources..."
+
+              # Stop/remove current container (frees writable layer)
+              docker stop ml-api || true
+              docker rm ml-api || true
+
+              # Aggressive cleanup
+              docker system prune -af || true
+              docker volume prune -f || true
+
+            else
+              echo "Disk space OK -> skipping prune."
+            fi
+
+            echo "== Disk after potential cleanup =="
+            df -h || true
+            docker system df || true
+
+            # Login to ECR (requires aws cli on EC2 OR use cred helper)
             aws ecr get-login-password --region "$AWS_REGION" \
               | docker login --username AWS --password-stdin \
               "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
