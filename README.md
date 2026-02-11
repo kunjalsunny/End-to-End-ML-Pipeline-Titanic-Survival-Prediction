@@ -1,4 +1,4 @@
-# Data-Science-End-to-End (Titanic)
+# End-to-End ML Pipeline: Titanic Survival Prediction
 
 End-to-end ML project scaffold with:
 - modular Python package structure (`src/`)
