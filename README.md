@@ -11,7 +11,7 @@ End-to-end ML project scaffold with:
 ---
 
 ```text
-kunjalsunny-data-science-end-to-end/
+kunjalsunny-End-to-End-ML-Pipeline-Titanic-Survival-Prediction/
 ├─ README.md
 ├─ application.py
 ├─ requirements.txt
@@ -54,7 +54,7 @@ kunjalsunny-data-science-end-to-end/
 
 ### 1. Clone
 ```bash
-git clone https://github.com/kunjalsunny/Data-Science-End-to-End.git
+git clone https://github.com/kunjalsunny/End-to-End-ML-Pipeline-Titanic-Survival-Prediction.git
 cd Data-Science-End-to-End
 ```
 
@@ -92,8 +92,8 @@ End-to-end ML project scaffold with:
 
 ### Clone
 ```bash
-git clone https://github.com/kunjalsunny/Data-Science-End-to-End.git
-cd Data-Science-End-to-End
+git clone https://github.com/kunjalsunny/End-to-End-ML-Pipeline-Titanic-Survival-Prediction.git
+cd End-to-End-ML-Pipeline-Titanic-Survival-Prediction
 
 
 Setup
