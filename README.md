@@ -10,157 +10,47 @@ End-to-end ML project scaffold with:
 
 ---
 
-## Project structure
-Directory structure:
-└── kunjalsunny-data-science-end-to-end/
-    ├── README.md
-    ├── application.py
-    ├── Dockerfile
-    ├── requirements.txt
-    ├── setup.py
-    ├── template.py
-    ├── .dockerignore
-    ├── .dvcignore
-    ├── artifacts/
-    │   ├── preprocessor.pkl
-    │   ├── raw_data.csv.dvc
-    │   └── test_data.csv
-    ├── catboost_info/
-    │   ├── catboost_training.json
-    │   ├── learn_error.tsv
-    │   ├── time_left.tsv
-    │   └── learn/
-    │       └── events.out.tfevents
-    ├── mlruns/
-    │   └── 0/
-    │       ├── meta.yaml
-    │       ├── 376168c49249443fbf265de1d3d8d058/
-    │       │   ├── meta.yaml
-    │       │   ├── metrics/
-    │       │   │   └── accuracy
-    │       │   ├── outputs/
-    │       │   │   └── m-23b56877e0154f58a9a1ab0898ea902b/
-    │       │   │       └── meta.yaml
-    │       │   ├── params/
-    │       │   │   ├── learning_rate
-    │       │   │   ├── n_estimators
-    │       │   │   └── subsample
-    │       │   └── tags/
-    │       │       ├── mlflow.runName
-    │       │       ├── mlflow.source.git.commit
-    │       │       ├── mlflow.source.name
-    │       │       └── mlflow.source.type
-    │       ├── db55ab5856db48609b817ae5cc79d8c9/
-    │       │   ├── meta.yaml
-    │       │   ├── metrics/
-    │       │   │   └── accuracy
-    │       │   ├── outputs/
-    │       │   │   └── m-31953c5766a54e039010b84af67b8827/
-    │       │   │       └── meta.yaml
-    │       │   ├── params/
-    │       │   │   └── n_estimators
-    │       │   └── tags/
-    │       │       ├── mlflow.runName
-    │       │       ├── mlflow.source.git.commit
-    │       │       ├── mlflow.source.name
-    │       │       └── mlflow.source.type
-    │       ├── f09a530a024944509f365b3221b7628f/
-    │       │   ├── meta.yaml
-    │       │   ├── metrics/
-    │       │   │   └── accuracy
-    │       │   ├── outputs/
-    │       │   │   └── m-14f0864496ec4c45a65ca6b0943d70e8/
-    │       │   │       └── meta.yaml
-    │       │   ├── params/
-    │       │   │   ├── learning_rate
-    │       │   │   ├── n_estimators
-    │       │   │   └── subsample
-    │       │   └── tags/
-    │       │       ├── mlflow.runName
-    │       │       ├── mlflow.source.git.commit
-    │       │       ├── mlflow.source.name
-    │       │       └── mlflow.source.type
-    │       └── models/
-    │           ├── m-14f0864496ec4c45a65ca6b0943d70e8/
-    │           │   ├── meta.yaml
-    │           │   ├── artifacts/
-    │           │   │   ├── conda.yaml
-    │           │   │   ├── MLmodel
-    │           │   │   ├── python_env.yaml
-    │           │   │   └── requirements.txt
-    │           │   ├── metrics/
-    │           │   │   └── accuracy
-    │           │   ├── params/
-    │           │   │   ├── learning_rate
-    │           │   │   ├── n_estimators
-    │           │   │   └── subsample
-    │           │   └── tags/
-    │           │       ├── mlflow.source.git.commit
-    │           │       ├── mlflow.source.name
-    │           │       └── mlflow.source.type
-    │           ├── m-23b56877e0154f58a9a1ab0898ea902b/
-    │           │   ├── meta.yaml
-    │           │   ├── artifacts/
-    │           │   │   ├── conda.yaml
-    │           │   │   ├── MLmodel
-    │           │   │   ├── python_env.yaml
-    │           │   │   └── requirements.txt
-    │           │   ├── metrics/
-    │           │   │   └── accuracy
-    │           │   ├── params/
-    │           │   │   ├── learning_rate
-    │           │   │   ├── n_estimators
-    │           │   │   └── subsample
-    │           │   └── tags/
-    │           │       ├── mlflow.source.git.commit
-    │           │       ├── mlflow.source.name
-    │           │       └── mlflow.source.type
-    │           └── m-31953c5766a54e039010b84af67b8827/
-    │               ├── meta.yaml
-    │               ├── artifacts/
-    │               │   ├── conda.yaml
-    │               │   ├── MLmodel
-    │               │   ├── python_env.yaml
-    │               │   └── requirements.txt
-    │               ├── metrics/
-    │               │   └── accuracy
-    │               ├── params/
-    │               │   └── n_estimators
-    │               └── tags/
-    │                   ├── mlflow.source.git.commit
-    │                   ├── mlflow.source.name
-    │                   └── mlflow.source.type
-    ├── src/
-    │   ├── __init__.py
-    │   └── datascience/
-    │       ├── __init__.py
-    │       ├── exception.py
-    │       ├── logger.py
-    │       ├── utils.py
-    │       ├── components/
-    │       │   ├── __init__.py
-    │       │   ├── data_ingestion.py
-    │       │   ├── data_transformation.py
-    │       │   ├── model_monitoring.py
-    │       │   └── model_trainer.py
-    │       └── pipelines/
-    │           ├── __init__.py
-    │           ├── prediction_pipeline.py
-    │           └── training_pipeline.py
-    ├── templates/
-    │   ├── home.html
-    │   └── index.html
-    ├── .dvc/
-    │   └── config
-    ├── .ebextensions/
-    │   └── python.config
-    └── .github/
-        └── workflows/
-            ├── cd.yml
-            └── ci.yml
+```text
+kunjalsunny-data-science-end-to-end/
+├─ README.md
+├─ application.py
+├─ requirements.txt
+├─ setup.py
+├─ Dockerfile
+├─ template.py
+├─ templates/
+│  ├─ index.html
+│  └─ home.html
+├─ src/
+│  └─ datascience/
+│     ├─ exception.py
+│     ├─ logger.py
+│     ├─ utils.py
+│     ├─ components/
+│     │  ├─ data_ingestion.py
+│     │  ├─ data_transformation.py
+│     │  ├─ model_trainer.py
+│     │  └─ model_monitoring.py
+│     └─ pipelines/
+│        ├─ training_pipeline.py
+│        └─ prediction_pipeline.py
+├─ artifacts/               # generated outputs (tracked via DVC if needed)
+│  ├─ preprocessor.pkl
+│  └─ *.dvc
+├─ .github/workflows/
+│  ├─ ci.yml
+│  └─ cd.yml
+├─ .dvc/
+│  └─ config
+├─ .ebextensions/
+│  └─ python.config
+└─ (auto-generated)
+   ├─ mlruns/               # MLflow local store (do not commit)
+   └─ catboost_info/        # CatBoost logs (do not commit)
 
 
-## Quickstart (Copy–Paste)
+```
+## Quickstart
 
 ### 1. Clone
 ```bash
